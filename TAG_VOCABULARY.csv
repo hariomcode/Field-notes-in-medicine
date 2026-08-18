@@ -1,0 +1,41 @@
+Category,Value
+Case Type,Rare disease
+Case Type,Rare presentation of a common disease
+Case Type,Social or systemic story
+Case Type,Public health lesson
+Case Type,Programme or innovation
+Specialty,Medicine
+Specialty,Pediatrics
+Specialty,Surgery
+Specialty,Obstetrics & Gynaecology
+Specialty,Psychiatry
+Specialty,Dermatology
+Specialty,Orthopedics
+Specialty,ENT
+Specialty,Ophthalmology
+Specialty,Emergency/Critical care
+Specialty,Other
+Age Group,Neonate
+Age Group,Infant
+Age Group,Child
+Age Group,Adolescent
+Age Group,Adult
+Age Group,Elderly
+Care Setting,Home visit
+Care Setting,Sub-centre/PHC
+Care Setting,CHC
+Care Setting,District hospital
+Care Setting,Camp/Outreach
+Care Setting,Other
+Social Determinant,Delay in care-seeking
+Social Determinant,Cost barrier
+Social Determinant,Distance/Transport barrier
+Social Determinant,Gender-related barrier
+Social Determinant,Health literacy
+Social Determinant,Traditional belief/practice
+Social Determinant,None apparent
+Outcome,Recovered
+Outcome,Referred
+Outcome,Lost to follow-up
+Outcome,Died
+Outcome,Ongoing

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Notes in Medicine — cases and stories from rural practice</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div>
+      <a class="site-title" href="index.html">Field Notes in Medicine</a>
+      <p class="site-tagline">Cases and stories from rural practice — for reference, teaching, and advocacy.</p>
+    </div>
+    <nav class="site-nav">
+      <a href="index.html">Browse cases</a>
+      <a href="submission-guidelines.html">Submit a case</a>
+      <a href="ethics-consent.html">Ethics & consent</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="page-hero">
+    <h1>Browse cases</h1>
+    <p>Rare diseases, rare presentations of common disease, and the social stories behind them — documented from rural practice for future reference, teaching, and policy use.</p>
+  </div>
+
+  <div class="browse-layout">
+    <aside>
+      <button id="clear-filters">Clear all filters</button>
+      <div id="filters"></div>
+    </aside>
+    <section>
+      <div class="search-row">
+        <input id="search" type="text" placeholder="Search by title, disease, or keyword…">
+        <span id="result-count"></span>
+      </div>
+      <p id="load-status">Loading cases…</p>
+      <div id="case-grid" class="case-grid"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  Field Notes in Medicine — published under CC BY-NC-SA. <a href="submission-guidelines.html">Contribute a case</a>.
+</footer>
+
+<script src="js/vendor/papaparse.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
