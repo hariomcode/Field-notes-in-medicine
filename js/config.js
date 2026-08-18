@@ -32,7 +32,7 @@ const CONFIG = {
   SITE_TAGLINE: "Cases and stories from rural practice — for reference, teaching, and advocacy.",
 
   // ---- Fill these in once your Google Form + Sheet are ready ----
-  SHEET_ID: "1w1u2b6o7uAT-QAGk01SJYY2jWKproJ_xROUVkfW1xAs/edit?resourcekey=&gid=578906664#gid=578906664",     // e.g. "1AbCdEfGhIjKlMnOpQrStUvWxYz1234567890abcd"
+  SHEET_ID: "",     // e.g. "1AbCdEfGhIjKlMnOpQrStUvWxYz1234567890abcd"
   SHEET_GID: "0",   // the tab (gid) holding case responses; "0" = first tab
 
   // Local fallback data used until SHEET_ID is set, or if the live fetch fails.

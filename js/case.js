@@ -20,6 +20,19 @@ function splitMulti(value) {
   return (value || "").split(",").map(v => v.trim()).filter(Boolean);
 }
 
+function caseTypeSlot(type) {
+  const order = CONFIG.TAG_VOCAB["Case Type"];
+  const i = order.indexOf(type);
+  return i === -1 ? null : (i % 5) + 1;
+}
+
+function outcomeStatus(outcome) {
+  if (outcome === "Recovered") return "good";
+  if (outcome === "Died") return "critical";
+  if (outcome === "Lost to follow-up") return "serious";
+  return null;
+}
+
 async function loadAllCases() {
   const url = getCsvUrl();
   const res = await fetch(url);
@@ -33,10 +46,14 @@ function render(row) {
   const title = col(row, "TITLE") || "(untitled case)";
   document.title = `${title} — ${CONFIG.SITE_NAME}`;
 
-  const tagChips = [
-    col(row, "CASE_TYPE"), col(row, "SPECIALTY"), col(row, "AGE_GROUP"),
-    col(row, "CARE_SETTING"), ...splitMulti(col(row, "SOCIAL_TAGS")),
-    ...splitMulti(col(row, "DISEASE_TAGS"))
+  const type = col(row, "CASE_TYPE");
+  const outcome = col(row, "OUTCOME");
+  const typeSlot = caseTypeSlot(type);
+  const status = outcomeStatus(outcome);
+
+  const secondaryChips = [
+    col(row, "SPECIALTY"), col(row, "AGE_GROUP"), col(row, "CARE_SETTING"),
+    ...splitMulti(col(row, "SOCIAL_TAGS")), ...splitMulti(col(row, "DISEASE_TAGS"))
   ].filter(Boolean);
 
   const location = [col(row, "DISTRICT"), col(row, "STATE")].filter(Boolean).join(", ");
@@ -47,12 +64,13 @@ function render(row) {
   document.getElementById("case-content").innerHTML = `
     <p class="back-link"><a href="index.html">&larr; Back to all cases</a></p>
     <div class="case-detail-tags">
-      ${tagChips.map(t => `<span class="chip">${escapeHtml(t)}</span>`).join("")}
+      ${type ? `<span class="badge badge-type"${typeSlot ? ` data-cat="${typeSlot}"` : ""}>${escapeHtml(type)}</span>` : ""}
+      ${outcome ? `<span class="badge badge-outcome"${status ? ` data-status="${status}"` : ""}>${escapeHtml(outcome)}</span>` : ""}
+      ${secondaryChips.map(t => `<span class="chip">${escapeHtml(t)}</span>`).join("")}
     </div>
     <h1>${escapeHtml(title)}</h1>
     <p class="case-detail-meta">
       ${location ? escapeHtml(location) + " · " : ""}
-      ${col(row, "OUTCOME") ? "Outcome: " + escapeHtml(col(row, "OUTCOME")) + " · " : ""}
       ${caseId ? "Case ID: " + escapeHtml(caseId) : ""}
     </p>
 

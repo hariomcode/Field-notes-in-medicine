@@ -87,6 +87,19 @@ function renderFilterSidebar() {
   }
 }
 
+function caseTypeSlot(type) {
+  const order = CONFIG.TAG_VOCAB["Case Type"];
+  const i = order.indexOf(type);
+  return i === -1 ? null : (i % 5) + 1;
+}
+
+function outcomeStatus(outcome) {
+  if (outcome === "Recovered") return "good";
+  if (outcome === "Died") return "critical";
+  if (outcome === "Lost to follow-up") return "serious";
+  return null; // Referred / Ongoing — neutral, no status color
+}
+
 function cardHtml(row) {
   const title = col(row, "TITLE") || "(untitled case)";
   const caseId = col(row, "CASE_ID");
@@ -98,11 +111,13 @@ function cardHtml(row) {
   const snippet = col(row, "DISCUSSION") || col(row, "HISTORY");
   const tags = splitMulti(col(row, "DISEASE_TAGS"));
   const location = [district, state_].filter(Boolean).join(", ");
+  const typeSlot = caseTypeSlot(type);
+  const status = outcomeStatus(outcome);
 
   return `
     <a class="case-card" href="case.html?id=${encodeURIComponent(caseId)}">
       <div class="case-card-badges">
-        ${type ? `<span class="badge badge-type">${escapeHtml(type)}</span>` : ""}
+        ${type ? `<span class="badge badge-type"${typeSlot ? ` data-cat="${typeSlot}"` : ""}>${escapeHtml(type)}</span>` : ""}
         ${specialty ? `<span class="badge">${escapeHtml(specialty)}</span>` : ""}
       </div>
       <h3>${escapeHtml(title)}</h3>
@@ -112,7 +127,7 @@ function cardHtml(row) {
       </div>
       <div class="case-card-meta">
         <span>${escapeHtml(location || "Location not specified")}</span>
-        ${outcome ? `<span>· ${escapeHtml(outcome)}</span>` : ""}
+        ${outcome ? `<span class="badge badge-outcome"${status ? ` data-status="${status}"` : ""}>${escapeHtml(outcome)}</span>` : ""}
         ${caseId ? `<span class="case-id">${escapeHtml(caseId)}</span>` : ""}
       </div>
     </a>`;
